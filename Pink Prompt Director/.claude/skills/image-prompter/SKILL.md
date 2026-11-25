@@ -66,7 +66,7 @@ Stage 2 — Mode 0 face lock build (see Mode 0 section below). Tool fork between
 
 ### Mode 0 — Face lock (new characters only)
 
-An imported character that already has a reference image skips Mode 0 and goes straight to Mode 1. Mode 0 is only for building a face that doesn't exist yet. Tool fork: Nano Banana Pro (default) or GPT-2 (high detail, sharper lighting, more cinematic, credit-heavier). Both use mid-gray seamless (the locked default backdrop — white only on explicit request), soft soft lighting, and a locked baseline wardrobe (plain black camisole for women, plain black ribbed tank for men). Produces the canonical reference image. Run once per new character.
+An imported character that already has a reference image skips Mode 0 and goes straight to Mode 1. Mode 0 is only for building a face that doesn't exist yet. Tool fork: Nano Banana Pro (default) or GPT-2 (high detail, sharper lighting, more cinematic, credit-heavier). Both use mid-gray seamless (the locked default backdrop — white only on explicit request), soft lighting, and a locked baseline wardrobe (plain black camisole for women, plain black ribbed tank for men). Produces the canonical reference image. Run once per new character.
 
 ### Mode 1 — Single-image character outfit (the base outfit reference)
 
@@ -302,7 +302,7 @@ When the user asks for a night scene, the night work has a specific theatrical a
 Mid-gray seamless studio background — even neutral mid-gray, no seam line, no gradient, no falloff to black or white. Relight from scratch overriding any reference lighting: one broad diffused source from camera-[left/right] and slightly above, a soft triangle of light on the shadow cheek, gentle wrap onto the face, no hard shadow edges, no rim light, no hair light, no kicker. Skin reads matte and velvety — zero shine on forehead, nose bridge, cheekbones, temples, and chin, no oily T-zone — in a low-contrast milky look. Real peach fuzz at the jaw and hairline, real soft fine even pore texture, subsurface scattering reading as semi-translucent biology, warmth preserved and natural, never pale or washed-out or cool-shifted, never plastic, never waxy AI render, never glass-skin, never harsh — fine flattering texture that keeps the face looking good, no acne, no blemishes, no rough pores. Photographed on a 50mm prime at a wide aperture, natural round bokeh, even sharpness, soft natural film grain. Photographed not generated.
 ```
 
-**Why the lean close, not the full cinema stack:** on a flat seamless plate the full texture-and-grade stack just dilutes — the heavy stack can push contrast back up, which is exactly what the gray ground is trying to lower. The lean Rembrandt close does the matte/specular/warmth work without re-introducing contrast, and its "warmth preserved and natural, never pale or washed-out or cool-shifted" clause is what keeps skin and wardrobe reading at their true natural tone against the neutral gray. This is the same per-zone specular kill the cinema-worldbuilder Capture Realism block uses, applied to a still.
+**Why the lean close, not the full cinema stack:** on a flat seamless plate the full texture-and-grade stack just dilutes — the heavy stack can push contrast back up, which is exactly what the gray ground is trying to lower. The lean Rembrandt close does the matte/specular/warmth work without re-introducing contrast, and its "warmth preserved and natural, never pale or washed-out or cool-shifted" clause is what keeps skin and wardrobe reading at their true natural tone against the neutral gray. The per-zone specular kill is the same one the video-prompter Capture Realism block uses, applied to a still.
 
 **6-panel sheets:** the gray default applies the same way — use "Mid-gray seamless studio backdrop applied uniformly across all six panels — even neutral mid-gray, no seam line, no gradient," and close with the lean Rembrandt grade above instead of the full cinema stack. Keep everything else (panel layout, identity lock) identical. Only swap to white-across-all-six-panels if the user explicitly asks for a white sheet.
 
@@ -346,7 +346,7 @@ Real human skin captured on a real cinema camera — refined and real, peach fuz
 ```
 
 **Modal application:**
-- **Mode 0 (face lock), Mode 1 (single-image character outfit), Mode 2 (6-panel sheet), Mode 4 (GPT-2 detail), Mode 5 (outfit replacement):** append the full stack as the closing block, with the exception of Mode 5 — it has its own special closing documented in its section.
+- **Mode 4 (GPT-2 detail):** append the full stack as the closing block. **Modes 0, 1 and 2** on the default mid-gray backdrop close with the lean Rembrandt grade from the MID-GRAY SEAMLESS section instead (the full stack only on an explicit white card). **Mode 5** has its own locked closing.
 - **Mode 3 (environment plate) and Mode 6 (character-in-scene):** both use the cinema-prose register, which folds the cinema stack language INTO the closing camera-spec paragraph rather than appending it as a separate block. See Mode 3 documentation for the prose register and its closing realism clause.
 
 **The single most powerful phrases in this stack:**
@@ -377,7 +377,7 @@ When the user uploads reference images, extract everything visible in the frame 
 
 **Brand name rule (CRITICAL).** Never use real brand names or protected IP in the prompt output. Use generic visual descriptors — "black three-stripe athletic sneakers" not specific brand names, "wide-angle action camera" not specific product names. Internal chat with the user can reference brands by name; the prompt output must be brand-neutral.
 
-**Age-blind rule.** Never describe characters by age. Avoid: *boy, girl, child, kid, young, teen, little, middle-aged, elderly, old.* Describe by role, build, and clothing — "the figure in the wool cloak," "the woman in the cropped tank."
+**Age-blind rule.** Never describe characters by age in the prompt text (a wording rule only; the Adults-only rule in UNIVERSAL PROMPT RULES is the actual check). Avoid: *boy, girl, child, kid, young, teen, little, middle-aged, elderly, old.* Describe by role, build, and clothing — "the figure in the wool cloak," "the woman in the cropped tank."
 
 **No-invention rule.** If the user gives you a reference image and asks for the same character in a new scene, do not invent wardrobe or styling details that aren't in the image or specified in the request. If something is needed but not specified (e.g., a new outfit for a new scene), ask before composing.
 
@@ -387,7 +387,7 @@ When the user uploads reference images, extract everything visible in the frame 
 
 **When to use:** Any time a character is being developed from scratch and there is no existing canonical reference image of their face. Run this BEFORE any outfit work, any 6-panel sheet, any scene plate. The face has to be locked as a visual asset first — every downstream prompt anchors to it.
 
-**Goal:** Produce the canonical face reference for the character. Identity only — no outfit considerations beyond a locked neutral baseline top, no environment, no posing direction. Just: a clean, locked face on white background with soft soft lighting that makes the skin read matte and cinema-placement-ready.
+**Goal:** Produce the canonical face reference for the character. Identity only — no outfit considerations beyond a locked neutral baseline top, no environment, no posing direction. Just: a clean, locked face on a mid-gray seamless background (white only on explicit request) with soft lighting that makes the skin read matte and cinema-placement-ready.
 
 **Universal wardrobe lock for Mode 0:** Every face lock prompt — regardless of tool — puts the character in a neutral baseline top:
 - **Women:** plain black thin-strap camisole
@@ -423,7 +423,7 @@ Pre-prompt check — Nano Banana Pro face lock (single-pass):
 - **Character spec:** [identity essentials only — heritage, build, skin, hair color + length + texture, eye shape + color, key identity markers like beauty marks/scars/piercings]
 - **Wardrobe:** plain black [camisole / ribbed tank]
 - **Backdrop:** mid-gray seamless studio (locked default)
-- **Lighting:** soft soft natural light from camera-[left/right]
+- **Lighting:** soft natural light from camera-[left/right]
 - **Framing:** 3:4 headshot, forehead to upper chest, face filling most of the frame
 
 Sound good?
@@ -431,11 +431,11 @@ Sound good?
 **Canonical Step 0.A prompt structure:**
 
 ```
-A clean cinema-character-reference 3:4 headshot, framed from forehead to upper chest with the face filling most of the frame. [Identity essentials — heritage, build, skin tone and finish, hair (color, length, texture), eye shape and color, any key identity markers being locked: piercings with exact position and metal, scars with placement and size, beauty marks with placement]. She wears [a plain black thin-strap camisole / he wears a plain black ribbed tank], no jewelry, no logos, no graphics. Body squared to camera, head level, neutral relaxed expression, eyes to camera, lips closed and relaxed, subtle controlled energy.
+A clean cinema-character-reference headshot, framed from forehead to upper chest with the face filling most of the frame. [Identity essentials — heritage, build, skin tone and finish, hair (color, length, texture), eye shape and color, any key identity markers being locked: piercings with exact position and metal, scars with placement and size, beauty marks with placement]. She wears [a plain black thin-strap camisole / he wears a plain black ribbed tank], no jewelry, no logos, no graphics. Body squared to camera, head level, neutral relaxed expression, eyes to camera, lips closed and relaxed, subtle controlled energy.
 
 Mid-gray seamless studio background — even neutral mid-gray, no seam line, no gradient, no falloff to black or white. Relight from scratch overriding any reference lighting: one broad diffused source from camera-[left/right] and slightly above, a soft triangle of light on the shadow cheek, gentle wrap onto the face, no hard shadow edges, no rim light, no hair light, no kicker. Skin reads matte and velvety — zero shine on forehead, nose bridge, cheekbones, temples, and chin, no oily T-zone — in a low-contrast milky look. Skin renders at its true natural skin tone and wardrobe at its true natural color, warmth preserved and natural against the neutral gray, never pale or washed-out or cool-shifted by the background. Real peach fuzz at the jaw and hairline, real soft fine even pore texture, subsurface scattering reading as semi-translucent biology, never plastic, never waxy AI render, never glass-skin, never harsh — fine flattering texture that keeps the face looking good, no acne, no blemishes, no rough pores. Photographed on a 50mm prime at a wide aperture, natural round bokeh, even sharpness, soft natural film grain. Photographed not generated.
 
-[Gray is the locked default — use the lean Rembrandt close above. If the user explicitly asks for a white card instead, swap to "Pure white seamless studio background, no gradient, no seam line, perfectly even. Soft soft cinematic light from camera-[left/right], very diffused, gentle wrap onto the face, no hard shadow edges, no rim light, no hair light, no kicker. Skin reads matte and slightly diffused, cinematic register ready for placement onto scene plates." and append the full cinema stack from "THE CINEMA STACK" section instead of this lean close.]
+[Gray is the locked default — use the lean Rembrandt close above. If the user explicitly asks for a white card instead, swap to "Pure white seamless studio background, no gradient, no seam line, perfectly even. Soft cinematic light from camera-[left/right], very diffused, gentle wrap onto the face, no hard shadow edges, no rim light, no hair light, no kicker. Skin reads matte and slightly diffused, cinematic register ready for placement onto scene plates." and append the full cinema stack from "THE CINEMA STACK" section instead of this lean close.]
 
 ---
 
@@ -452,12 +452,12 @@ Pre-prompt check — GPT-2 face lock (single-pass, chest-up only):
 - **Character spec:** [identity essentials only — heritage, build, skin, hair color + length + texture, eye shape + color, key identity markers]
 - **Wardrobe:** plain black [camisole / ribbed tank]
 - **Backdrop:** mid-gray seamless studio (locked default)
-- **Lighting:** soft soft natural light from camera-[left/right]
+- **Lighting:** soft natural light from camera-[left/right]
 - **Framing:** chest-up portrait, face dominant in the frame
 
 Sound good?
 
-**Canonical Step 0.B prompt structure:** Use the GPT-2 prompt structure documented in the GPT-2 section of this skill (Mode 4). Apply the same identity essentials, wardrobe lock, white backdrop, and soft soft lighting as Step 0.A — just routed through the GPT-2 prompt grammar instead of the Nano Banana Pro grammar.
+**Canonical Step 0.B prompt structure:** Use the GPT-2 prompt grammar from the Mode 4 section for the identity and skin-detail paragraphs, but keep the Step 0.A backdrop and lighting: mid-gray seamless, the lean soft Rembrandt close (one broad diffused source, no rim light, no hair light, no kicker), and the same wardrobe lock. Do not use Mode 4's classical beauty lighting (hair light, underlight bounce) or the full cinema stack here.
 
 ---
 
@@ -479,7 +479,7 @@ Mode 0 is one-and-done per character. Once the locked 3:4 headshot exists, every
 **Frame and composition:**
 - Framing: Subject centered, weight shifted onto one hip in the cocked-hip model stance, body angled 15–30° from camera, chin slightly tucked or level, eyes to camera or slightly off-camera. Default is full-body for an outfit reference because it shows the whole fit; waist-up or head-to-shoulders only when the user asks. Do not write aspect ratios into the prompt — the aspect goes in the settings table, not the prompt body.
 - Background: **Mid-gray seamless studio.** The locked default for all character/outfit work — even neutral mid-gray, no seam line, no gradient. Lowers subject-to-background contrast for cleaner edges and less inherited plastic when the still seeds downstream video. **Exception:** if the user explicitly asks for a clean white card (a finished standalone still to post or hand off), swap to pure white seamless and use the full cinema stack close instead of the lean Rembrandt grade.
-- Lighting: Soft soft cinematic key from camera-left or camera-right (user picks side), very diffused, gentle wrap onto the figure, no harsh shadows, no rim light, no hair light, no kicker — only the gentlest lifted shadow on the off-light side. Skin reads matte and slightly diffused, cinema-placement ready.
+- Lighting: Soft cinematic key from camera-left or camera-right (user picks side), very diffused, gentle wrap onto the figure, no harsh shadows, no rim light, no hair light, no kicker — only the gentlest lifted shadow on the off-light side. Skin reads matte and slightly diffused, cinema-placement ready.
 
 **Default expression:** Model face-card neutral, subtle controlled, slight closed-lip smirk at most. Never teeth-showing smile unless the user specifically requests it.
 
@@ -490,7 +490,7 @@ Mode 0 is one-and-done per character. Once the locked 3:4 headshot exists, every
 
 Mid-gray seamless studio background — even neutral mid-gray, no seam line, no gradient, no falloff to black or white. Relight from scratch overriding any reference lighting: one broad diffused source from camera-[left/right] and slightly above, gentle wrap onto the figure, no harsh shadows, no rim light, no hair light, no kicker, only the gentlest lifted shadow on the off-light side. Skin and fabric read matte and velvety in a low-contrast milky look, no shine, no oily T-zone. Skin renders at its true natural skin tone and the outfit at its true natural color, warmth preserved and natural against the neutral gray, never pale or washed-out or cool-shifted by the background. Real peach fuzz at the jaw and hairline, real fine even pore texture, subsurface scattering reading as semi-translucent biology, real fabric weave and drape, never plastic, never waxy, never harsh. Photographed on a 50mm prime at a wide aperture, natural round bokeh, even sharpness, soft natural film grain. Photographed not generated. [Framing — full body / waist-up / head-to-shoulders].
 
-[Gray is the locked default — use the lean Rembrandt close above. If the user explicitly asks for a white card, swap to "Pure white seamless studio background, no gradient, no seam line, perfectly even. Soft soft cinematic light from camera-[left/right]..." and append the full cinema stack from "THE CINEMA STACK" section instead of this lean close.]
+[Gray is the locked default — use the lean Rembrandt close above. If the user explicitly asks for a white card, swap to "Pure white seamless studio background, no gradient, no seam line, perfectly even. Soft cinematic light from camera-[left/right]..." and append the full cinema stack from "THE CINEMA STACK" section instead of this lean close.]
 ```
 
 **Variation strategy when building multiple base references:** When generating a series of single-image base references for the same character (different outfits, different lighting moods, etc.), keep the mid-gray seamless backdrop locked and vary one parameter per shot:
@@ -529,7 +529,7 @@ Don't vary face, skin, or core identity markers. Those stay locked.
 - Layout: 3×2 grid, equal cells, thin clean white gutters between panels, horizontal sheet orientation
 - Each panel composed within its cell as if it were its own shot — no cell should feel like a crop of a wider frame
 - Background: same studio backdrop across all six cells (default mid-gray seamless, matching the base reference) for consistency. Only swap to white-across-all-six-panels if the user explicitly asks for a white sheet (see the MID-GRAY SEAMLESS BACKDROP section).
-- Lighting: same three-point key/fill/rim setup across all six cells — identity stays locked when lighting is locked
+- Lighting: same single broad diffused key (no rim light, no hair light, no kicker) across all six cells — identity stays locked when lighting is locked
 - Do not write aspect ratios into the prompt — the aspect (16:9, locked for sheets) goes in the settings table, not the prompt body
 
 **Canonical Mode 2 prompt structure:**
@@ -555,7 +555,7 @@ Mid-gray seamless studio backdrop applied uniformly across all six panels — ev
 - Each panel only describes what's *different* from the locked identity — stance, angle, framing, focus.
 - Aspect ratio (16:9, locked) is stated in the settings table, never written into the prompt.
 - Lighting and backdrop are always uniform across all six cells.
-- Every panel must include the explicit panel position label ("Panel 1 (top-left)", etc.) so Nano Banana Pro can compose the grid correctly.
+- Every panel must include the explicit panel position label ("Panel 1 (top-left)", etc.) so GPT-2 can compose the grid correctly.
 
 ---
 
@@ -590,7 +590,7 @@ Mode 3's default output is a **pure environment plate** — the location with no
 
 3. **On the user's pick** (or "go with the default"), write the plate prompt in the chosen mode, with the settings table below it.
 
-The mode is chosen *with the user here in chat* — but in the prompt body it still only appears woven into the closing camera prose, never as a literal "M1" label (see the cinema-prose rules).
+The mode is chosen *with the user here in chat* — but in the prompt body it appears only as plain-language look description in the closing camera prose, with at most a brief "M1 narrative register" identifier at the end of that description, never as a standalone label (see the cinema-prose rules).
 
 **Goal:** A single still that captures the world (and the character, when present) and the camera grammar — as if a cinematographer locked off and grabbed a photo on the same camera package mid-take.
 
@@ -727,7 +727,7 @@ The voice is **cinematic anamorphic prose** — confident, declarative, observat
 
 **What the register sounds like:**
 
-> "A cinematic anamorphic still photograph captured handheld on a real cinema set — a Dutch-tilted intimate over-the-shoulder hero composition of a young Korean man standing alone in a dim converted private garage lounge at pre-dawn, the entire frame tilted at approximately 4 degrees Dutch angle camera-left low giving the composition a quietly off-kilter held-breath feel, the camera positioned right behind him at shoulder height in a waist-up framing showing his back, shoulders, and the back of his head filling the foreground with the wall-mounted television playing the live broadcast visible past his right shoulder in the mid-ground."
+> "A cinematic anamorphic still photograph captured handheld on a real cinema set — a Dutch-tilted intimate over-the-shoulder hero composition of a Korean man standing alone in a dim converted private garage lounge at pre-dawn, the entire frame tilted at approximately 4 degrees Dutch angle camera-left low giving the composition a quietly off-kilter held-breath feel, the camera positioned right behind him at shoulder height in a waist-up framing showing his back, shoulders, and the back of his head filling the foreground with the wall-mounted television playing the live broadcast visible past his right shoulder in the mid-ground."
 
 That opening sentence does the work of Blocks 1 and 2 in one continuous breath, with the camera position, the framing, the Dutch tilt, the subject placement, and the mood all woven together.
 
@@ -737,7 +737,7 @@ That opening sentence does the work of Blocks 1 and 2 in one continuous breath, 
 
 Every Mode 3 prompt is composed as five paragraphs in this order. Paragraphs are not labeled in the output — they flow as continuous prose for the model.
 
-**Paragraph 1 — Opening shot description.** One long sentence that establishes: the medium ("a cinematic anamorphic still photograph"), the framing register ("Dutch-tilted intimate hero composition"), the subject identification at high level ("a young Korean man standing in a dim converted private garage lounge at pre-dawn"), the camera position and angle in prose ("the camera positioned right behind him at shoulder height in a waist-up framing"), and the mood/intent ("quietly off-kilter held-breath feel"). This is the spine. Everything that follows hangs from this opening.
+**Paragraph 1 — Opening shot description.** One long sentence that establishes: the medium ("a cinematic anamorphic still photograph"), the framing register ("Dutch-tilted intimate hero composition"), the subject identification at high level ("a Korean man standing in a dim converted private garage lounge at pre-dawn"), the camera position and angle in prose ("the camera positioned right behind him at shoulder height in a waist-up framing"), and the mood/intent ("quietly off-kilter held-breath feel"). This is the spine. Everything that follows hangs from this opening.
 
 **Paragraph 2 — Character block.** Describes the character(s) in confident observational prose. Identity markers pulled from the attached reference written as visible facts in the frame ("dark layered mid-length tousled fringe falling across the back of his head, double small silver hoop earrings on each ear lobe catching faint warm spill, warm fair matte Korean skin"). Pose, attention, and held props woven in naturally ("a small black television remote held loosely in his right hand at his side... his head perfectly motionless, his eyes locked on the screen ahead of him").
 
@@ -793,6 +793,8 @@ Captured with a wide-latitude cinema look and a vintage 55mm-equivalent 2x anamo
 
 This example demonstrates the five-paragraph prose structure with references doing the geometry/identity work, positional prose instead of coordinates, and the closing realism clause.
 
+**Note:** this example has a character in frame, so it is a Mode 6 style plate. For a Mode 3 pure environment plate (the default), drop Paragraph 2 (character block), put the focal anchor in the world paragraphs, and drop the human-skin lines from the closing paragraph.
+
 ---
 
 ### THE OLD COORDINATE GRAMMAR (DEPRECATED)
@@ -830,7 +832,7 @@ Positional prose translation table:
 - Framing: chest-up, shoulders-up, or face-only (forehead to collarbone)
 - Background: mid-gray seamless studio (locked default, matches base references) OR soft moody studio backdrop if the user wants a more cinematic register — white seamless only on explicit request
 - Lighting: classical beauty lighting — soft key from slightly above and camera-left, soft fill at chest level from camera-right, subtle hair light behind, soft underlight bounce from below to lift eye sockets
-- Do not write aspect ratios into the prompt — the aspect goes in the settings table (9:16 or 4:5 for face/chest-up), not the prompt body.
+- Do not write aspect ratios into the prompt — the aspect goes in the settings table (3:4 default; offer 9:16 or 4:5 on request), not the prompt body.
 
 **Canonical Mode 4 (GPT-2) prompt structure:**
 
@@ -907,16 +909,18 @@ These apply to every prompt this skill produces, no exceptions:
 
 1. **No character names in prompt output.** Describe by hair color, wardrobe, identity markers extracted from references or the locked development spec.
 2. **No real brand names in prompt output.** Generic visual descriptors only.
-3. **No `@image` tags or `<<<image_n>>>` placeholders.** Image attachment happens in your generator's UI directly. The prompt is text-only.
-4. **No internal production context.** No "carried through the world," no "matching the previous scene." Every prompt is standalone and self-contained.
+3. **No `@image` tags or `<<<image_n>>>` placeholders.** Image attachment happens in your generator's UI directly. The prompt is text-only. Sole exception: the locked Mode 5 prompt, which uses `@image1` and `@image2`.
+4. **No internal production context.** No "carried through the world," no "matching the previous scene." Every prompt is standalone and self-contained. Modes 3 and 6 may say a detail carries from the attached reference ("carrying identically from the attached character reference"), since that is how the references do the identity and geometry work.
 5. **Pure visual description only.** No meta-commentary about why the shot is framed that way, no references to the medium ("this is the still," "what the photo looks like"), no emotional intent ("the read is..."). Every word describes a visible thing in the frame.
 6. **No teeth-showing smiles** unless the user explicitly requests one. Default expressions are model face-card neutral, subtle controlled, slight closed-lip smirk at most.
 7. **No negative prompts.** This skill does not output negative prompt blocks. The workflow doesn't use them.
-8. **Cinema stack baked in for Modes 0, 1, 2, 4, 5.** The cinema stack closes every Mode 0, 1, 2, 4, and 5 prompt (with Mode 5 using its own locked lean prompt). Mode 3 is the exception — see rule 9.
+8. **Closing block by mode.** Mode 4 closes with the full cinema stack. Modes 0, 1 and 2 close with the lean Rembrandt grade on mid-gray, or with the full cinema stack only on an explicit white card. Mode 5 uses its own locked lean prompt. Modes 3 and 6 are the exception — see rule 9.
 9. **Mode 3 uses the cinema-prose closing paragraph in place of the cinema stack AND locked tag block.** Mode 3 environment plates and Mode 6 character-in-scene plates close with the cinema-prose paragraph documented under "THE CINEMA-PROSE REGISTER" — the full look described in plain language (wide-latitude cinema capture, vintage anamorphic character, light diffusion bloom, color-negative film rendition with 35mm grain, never brand or model names), real anamorphic optical character (oval bokeh, handheld breath, edge falloff), theatrical fine grain, contemporary teal-amber grade with shadow/highlight handling, and the closing realism clause ("Real photographic frame captured on a real cinema camera... no CGI, no plastic, no AI smoothness, no skin smoothing"). This closing paragraph replaces the cinema stack AND the old locked tag block for Mode 3. The old tag block remains documented as a deprecated fallback only.
 10. **Single fenced code block on output.** Deliver the full prompt as one continuous code block ready for clean copy-paste — no stray prose inside the code block. The only wrappers are the pre-prompt confirmation (a short message BEFORE the block) and the settings table (immediately BELOW the block).
 11. **Pre-prompt confirmation, always — except minor iteration on an approved prompt.** Every full prompt is preceded by a bulleted "here's what I'm about to prompt, sound good?" check. **References listed first**, then character, outfit, backdrop/environment, framing. Wait for the green light. Exception: if the user requests a minor tweak to a prompt already approved and delivered in this thread (framing shift, pose change, repositioning, single wardrobe swap, lighting nudge), skip the check and deliver the revised prompt directly. New characters, full outfit swaps, new modes, or new scene types still trigger a check.
 12. **No aspect ratios in prompt output.** Never write "3:4 vertical aspect ratio," "16:9 horizontal," "21:9 cinematic," "4:5 portrait," "2.39:1," or any other ratio spec inside the prompt body. The aspect ratio is stated in the settings table below the code block, and the user sets it in their generator. The prompt describes framing in plain language only ("full body," "chest-up portrait," "wide establishing shot," "medium two-shot") — never with a numerical ratio.
+13. **Adults only.** Every human character is an adult. Never write a prompt for a character who is, or looks like, a minor, whatever words are used to describe them. If a reference image shows someone who may be a minor, stop and decline to build the prompt. Age words stay out of the prompt text (age-blind rule), but that is a wording rule, not a substitute for this check.
+14. **Real people.** Use a reference photo of a real person only if the user confirms it is themselves or that they have the person's consent. Do not build face-swap or identity-transfer prompts (Mode 0 import, Mode 5) for real, identifiable people, public figures included, without that confirmation, and never for sexual, deceptive or defamatory content.
 
 ---
 
@@ -940,7 +944,7 @@ Before writing the final prompt, silently catalog:
 - [ ] If Mode 3: closing realism clause is in place (full camera package + M-mode + "Real photographic frame... no CGI, no plastic, no AI" quality filter)
 - [ ] Pose, body angle, expression register chosen
 - [ ] No names, no brands, no internal context, no meta-commentary
-- [ ] Cinema stack will close the prompt (for Modes 0, 1, 2, 4; Mode 5 using its locked lean prompt; Mode 3 using the cinema-prose closing paragraph)
+- [ ] Closing block chosen: lean Rembrandt grade (Modes 0, 1, 2 on gray), full cinema stack (Mode 4, or Modes 0/1/2 on an explicit white card), locked lean prompt (Mode 5), cinema-prose closing paragraph (Modes 3 and 6)
 - [ ] Pre-prompt confirmation delivered and confirmed — references listed FIRST in the bullet list
 
 If anything needed for composition is missing from the user input, ask before writing.
@@ -951,6 +955,6 @@ If anything needed for composition is missing from the user input, ask before wr
 
 The flow is always: **confirm character → confirm what's about to be prompted → deliver the prompt in a fenced code block**.
 
-The user pastes the code block straight into their image generator. Engine routing: Nano Banana Pro for Mode 0 (default), Mode 1 (default), and Mode 5; GPT-2 offered on Modes 0 & 1, and locked for Mode 2, Mode 3, and Mode 4. The user attaches the reference images listed in the settings table (or selects them from their character/environment library) in the generator. The skill's job ends at the code block.
+The user pastes the code block straight into their image generator. Engine routing: Nano Banana Pro for Mode 0 (default), Mode 1 (default), and Mode 5; GPT-2 offered on Modes 0 & 1, locked for Modes 2, 3 and 6, and used for Mode 4 after the user confirms the credit cost. The user attaches the reference images listed in the settings table (or selects them from their character/environment library) in the generator. The skill's job ends at the code block.
 
 If the user requests multiple shots in one ask, deliver each in its own code block, sequentially numbered or labeled — but still run the pre-prompt confirmation once before delivering the batch.

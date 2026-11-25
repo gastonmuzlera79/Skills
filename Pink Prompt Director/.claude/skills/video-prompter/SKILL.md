@@ -49,7 +49,7 @@ Five modes share a wide-latitude cinema capture look and either a vintage 2x ana
 
 A great prompt is not a beautiful sentence. It is a production document. Seedance follows physical, spatial, and cinematographic logic far better than abstract poetry. Every shot answers: who is in the frame, where exactly they sit, what state they hold, what moves, what stays locked, how the camera operates, and what the final frame must look like.
 
-**Density rule.** Target prompt length is 280–400 words for single-shot scenes. Multi-shot sequences may run longer but never over 600. Every word should do work. When in doubt, trust the reference image to carry visual information and cut the redundant description.
+**Density rule.** Target prompt length is 450–600 words for single-shot scenes (the ten mandatory blocks take about 275 words on their own, counting Capture Realism and Camera Capture). Multi-shot sequences may run longer but never over 800. Every word should do work. When in doubt, trust the reference image to carry visual information and cut the redundant description.
 
 ---
 
@@ -192,7 +192,7 @@ No Chinese mode. No bilingual mode. English only.
 
 These apply to every Seedance prompt this skill produces, no exceptions:
 
-1. **Pre-prompt confirmation on every new scene.** Bulleted list (References / Mode / Scene / Characters / Frame Map / Camera / Runtime), references FIRST, runtime LAST. Skip only on iterations of a prompt just delivered.
+1. **Pre-prompt confirmation on every new scene.** Two tables (Scene, Cinema mode) followed by short bullets (References first, then Characters / Frame Map / Camera / Audio, Runtime last), as laid out in Step 2. Skip only on iterations of a prompt just delivered.
 2. **Delivery format, in order:** (a) bolded English title line with runtime, (b) English code block with discrete labeled blocks and inline `@imageN` tags, (c) the settings table BELOW the code block (model, aspect, duration, and the numbered references = the `@image` mapping).
 3. **`@imageN` numbering matches the bullet list order exactly.** Bullet 1 → `@image1`, bullet 2 → `@image2`, etc.
 4. **Every reference in the bullet list appears at least once as an `@imageN` tag** inside the code block.
@@ -215,6 +215,8 @@ These apply to every Seedance prompt this skill produces, no exceptions:
 21. **One main idea per shot.** One dominant action, one main camera strategy, one major lighting motivation. If a request requires more, split into a multi-shot sequence.
 22. **Trust the reference image for wardrobe.** The Subject Lock block names identity anchor, body orientation, pose, state, gaze, contact points, and the lock-down line. Do not re-describe wardrobe details that are already visible in the reference. Only specify the wardrobe details that the model cannot read from the image (e.g., "damp from rain," "torn at the shoulder," "covered in dust") — text-only state information the reference image can't convey.
 23. **Canonical reference always attached, never substituted by the plate.** Every named subject that appears in the scene gets its canonical reference (character reference sheet, vehicle reference, prop reference, creature reference) attached as its own `@imageN` slot — even when that subject is also visible inside the rendered environment plate. The plate carries the world (location, weather, light, set dressing, composition); the canonical reference carries identity (face, body, livery, markings, silhouette). Never let the plate stand in for a canonical reference. Subject Locks anchor to canonical reference tags (`@image1`, `@image2`, etc.); the World Plate block anchors to the plate tag (`@imageN`). Hard rule, no exceptions: if a character or vehicle appears in the plate AND has a canonical reference, the canonical reference still gets its own slot in the reference list and its own Subject Lock block in the prompt. This applies regardless of how clearly the subject reads in the plate. Identity fidelity is always anchored to the canonical reference, never to the rendered plate.
+24. **Adults only.** Every human character is an adult. Never write a prompt for a character who is, or looks like, a minor, whatever words are used to describe them. If a reference image shows someone who may be a minor, stop and decline to build the prompt. Age words stay out of the prompt text (age-blind rule), but that is a wording rule, not a substitute for this check.
+25. **Real people.** Use a reference photo of a real person only if the user confirms it is themselves or that they have the person's consent. Do not build prompts that animate real, identifiable people, public figures included, without that confirmation, and never for sexual, deceptive or defamatory content.
 
 ---
 
@@ -294,7 +296,7 @@ Every character in the frame gets a Subject Lock block. The Lock pins every prop
 
 **Single-character example:**
 
-> Subject Lock — @image1: Face, hair, oxblood corset, and silhouette identical throughout. Ponytail damp from the drizzle, fabric darker where rain has soaked in. Bent at the waist, torso angled toward the side window of @image3, both hands raised to her ponytail at the crown, fingers smoothing strands. Body squared to the car, weight even. Gaze locked on her own reflection in the wet glass.
+> Subject Lock — @image1: Face, hair, wardrobe, and silhouette identical throughout. Ponytail damp from the drizzle, fabric darker where rain has soaked in. Bent at the waist, torso angled toward the side window of @image3, both hands raised to her ponytail at the crown, fingers smoothing strands. Body squared to the car, weight even. Gaze locked on her own reflection in the wet glass.
 
 **Multi-character example:** each character gets a discrete Subject Lock block.
 
@@ -427,11 +429,11 @@ The Sound Bed describes **only what the scene physically produces** — sounds t
 
 **Audio modes (pick one based on user intent — ask if ambiguous):**
 
-- **Mode 1 (default) — Diegetic with SFX and ambient.** Realistic in-scene audio. `Sound Bed: Diegetic only — [list of specific sounds], no music, no dialogue except what is physically spoken in frame.`
-- **Mode 2 — Silent capture.** Used only when the user explicitly says they will upload music in post AND wants NO in-camera audio fighting it. `Sound Bed: NONE — fully silent capture. The audio track will be added separately in post.`
-- **Mode 3 — Diegetic with SFX, no music explicitly.** Same as Mode 1, just confirming no music will be added. `Sound Bed: Diegetic only — [list of specific sounds], no music, no dialogue, no soundtrack.`
+- **Option A (default) — Diegetic with SFX and ambient.** Realistic in-scene audio. `Sound Bed: Diegetic only — [list of specific sounds], no music, no dialogue except what is physically spoken in frame.`
+- **Option B — Silent capture.** Used only when the user explicitly says they will upload music in post AND wants NO in-camera audio fighting it. `Sound Bed: NONE — fully silent capture. The audio track will be added separately in post.`
+- **Option C — Diegetic with SFX, no music explicitly.** Same as Mode 1, just confirming no music will be added. `Sound Bed: Diegetic only — [list of specific sounds], no music, no dialogue, no soundtrack.`
 
-Mode 1/3 is the default. Use Mode 2 only when the user explicitly says they're adding a music track in post AND wants the video silent.
+Options A and C are the defaults. Use Option B only when the user explicitly says they're adding a music track in post AND wants the video silent.
 
 **Sound Bed example:**
 
@@ -480,7 +482,7 @@ The Camera Capture is the single closing line of every Seedance prompt. It conta
 
 **Default camera energy is handheld with breath, drift, and organic operator movement** — even in editorial / quiet / observational moments. The lived-in operator presence is part of the cinema register.
 
-**Locked-off tripod is OPT-IN ONLY** — used only when the user explicitly requests "locked off," "tripod," "no camera movement," "static," "still camera," or names a specific shot type that requires it (overhead surveillance plate, surgical observation, security cam aesthetic, formal portrait studio plate).
+**Locked-off tripod is OPT-IN ONLY in M1, M3 and M4** (M2 and M5 default to locked or a slow push, per the mode table) — used only when the user explicitly requests "locked off," "tripod," "no camera movement," "static," "still camera," or names a specific shot type that requires it (overhead surveillance plate, surgical observation, security cam aesthetic, formal portrait studio plate).
 
 ---
 
@@ -559,7 +561,7 @@ For impact slow-motion: append `intercut 96fps high-speed slow-motion at the [mo
 **Camera Capture line:**
 
 ```
-Camera Capture: wide-latitude cinema capture, vintage [XX]mm 2x anamorphic character at a wide aperture — oval bokeh, horizontal streak flares on stage lights — light diffusion bloom softening highlights, mixed handheld pit-photographer and orbital operator energy with hard cuts between angles, color-negative film rendition with fine grain, [stage-lighting color cast], heavy volumetric haze, real sweat sheen, 24fps 180° shutter, [XX] seconds.
+Camera Capture: wide-latitude cinema capture, vintage [XX]mm 2x anamorphic character at a wide aperture — oval bokeh, horizontal streak flares on stage lights — light diffusion bloom softening highlights, mixed handheld pit-photographer and orbital operator energy with hard cuts between angles, color-negative film rendition with fine grain, [stage-lighting color cast], heavy volumetric haze, damp matte sweat with no specular sheen, 24fps 180° shutter, [XX] seconds.
 ```
 
 Replace `[stage-lighting color cast]` with scene-specific language (e.g., "magenta-red color cast from the LED cube above," "amber and ultraviolet wash from side rigs," "cyan and white strobe punching through warm tungsten").
@@ -678,7 +680,7 @@ Before delivering the full prompt to the user, silently run this pass. If anythi
 - [ ] All ten labeled blocks present in the code block, in exact locked order: Scene & Mood → Frame Map → Subject Lock(s) → Cross-Frame Rules → Movement → Last Frame → World Plate → Sound Bed → Capture Realism → Camera Capture. None missing, none reordered, none merged, none renamed.
 - [ ] Every reference in the bullet list appears at least once as an `@imageN` tag inside the code block, numbering matches exactly
 - [ ] Negative prohibitions translated to positive locks throughout
-- [ ] Total prompt body word count within target range (280–400 single shot, up to 600 multi-shot)
+- [ ] Total prompt body word count within target range (450–600 single shot, up to 800 multi-shot)
 
 **Repair pass — if any of these conditions are detected, fix before delivery:**
 
@@ -711,4 +713,4 @@ After every prompt, offer a short menu so the user always sees where they can go
 
 If the user has an environment plate from `image-prompter`, wants camera grammar to match an existing plate, or is pairing a Seedance prompt with a still they already built, ask which cinema mode the plate used and lock the matching camera grammar in the Seedance prompt. The two skills share the same five-mode framework — when paired, the still and the video share visual DNA.
 
-Otherwise, do not bring this up. Cinema-worldbuilder operates standalone unless the user invokes the pairing.
+Otherwise, do not bring this up. This skill operates standalone unless the user invokes the pairing.
