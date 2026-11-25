@@ -1,0 +1,23 @@
+# Mid-gray seamless backdrop and lean Rembrandt close
+
+Part of the image-prompter skill. Read for Modes 0, 1, 2, 4 and 5. The lean close below replaces the full cinema stack on gray.
+
+## MID-GRAY SEAMLESS BACKDROP (LOCKED DEFAULT FOR ALL CHARACTER WORK)
+
+**Mid-gray seamless is the locked default backdrop** for all character work — face locks, character references, outfit plates, 6-panel sheets, and prop references. **Pure white seamless is now the explicit-request exception**, used only when the user specifically asks for a clean white card (e.g. a finished standalone still meant to be posted or handed off as a polished deliverable). When in doubt, default to gray.
+
+**Why gray as the standing default.** Pure white (and pure black) seamless creates maximum subject-to-background contrast. Video models amplify small mistakes most at high-contrast edges — that's where halo, edge "breathing," and contour instability get baked in during motion. A neutral mid-gray ground lowers the subject-to-background contrast, which means cleaner edge extraction and far less inherited contrast and plastic when the still is read as a reference frame. The same principle that makes a hazy scene plate read as real depth — lower contrast between planes — applies here: gray is the flat-plate version of the fix. Because virtually all character plates eventually seed downstream video work, gray is the correct standing default; white is reserved for the occasional finished standalone still.
+
+**The background stays neutral; the character does not.** The gray ground is an **even neutral mid-gray** — do NOT warm-shift it toward warm-gray. The neutral ground is the locked look. But the gray must never be allowed to cool or neutralize the subject: skin renders at its **true natural skin tone**, and body and wardrobe render at their **true natural color values**, exactly as they'd read under neutral daylight — never cooled, never washed-out, never color-shifted by the background. The relight-from-scratch language and the explicit "warmth preserved and natural, never pale or washed-out or cool-shifted" clause in the lighting close below are what hold this. Keep the background neutral and the subject true.
+
+**The white exception:** only when the user explicitly asks for white. In that case, swap the gray backdrop line for "Pure white seamless studio background, no gradient, no seam line, perfectly even" and close with the full cinema stack instead of the lean Rembrandt grade.
+
+**Lighting close for a mid-gray plate (lean soft Rembrandt grade — use this, NOT the full cinema stack):**
+
+```
+Mid-gray seamless studio background — even neutral mid-gray, no seam line, no gradient, no falloff to black or white. Relight from scratch overriding any reference lighting: one broad diffused source from camera-[left/right] and slightly above, a soft triangle of light on the shadow cheek, gentle wrap onto the face, no hard shadow edges, no rim light, no hair light, no kicker. Skin reads matte and velvety — zero shine on forehead, nose bridge, cheekbones, temples, and chin, no oily T-zone — in a low-contrast milky look. Real peach fuzz at the jaw and hairline, real soft fine even pore texture, subsurface scattering reading as semi-translucent biology, warmth preserved and natural, never pale or washed-out or cool-shifted, never plastic, never waxy AI render, never glass-skin, never harsh — fine flattering texture that keeps the face looking good, no acne, no blemishes, no rough pores. Photographed on a 50mm prime at a wide aperture, natural round bokeh, even sharpness, soft natural film grain. Photographed not generated.
+```
+
+**Why the lean close, not the full cinema stack:** on a flat seamless plate the full texture-and-grade stack just dilutes — the heavy stack can push contrast back up, which is exactly what the gray ground is trying to lower. The lean Rembrandt close does the matte/specular/warmth work without re-introducing contrast, and its "warmth preserved and natural, never pale or washed-out or cool-shifted" clause is what keeps skin and wardrobe reading at their true natural tone against the neutral gray. The per-zone specular kill is the same one the video-prompter Capture Realism block uses, applied to a still.
+
+**6-panel sheets:** the gray default applies the same way — use "Mid-gray seamless studio backdrop applied uniformly across all six panels — even neutral mid-gray, no seam line, no gradient," and close with the lean Rembrandt grade above instead of the full cinema stack. Keep everything else (panel layout, identity lock) identical. Only swap to white-across-all-six-panels if the user explicitly asks for a white sheet.
