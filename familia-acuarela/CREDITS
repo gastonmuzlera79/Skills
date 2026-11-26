@@ -1,0 +1,23 @@
+Una familia, en acuarela · fuentes y licencias de lo que hay en la película
+=========================================================================
+
+Material de terceros: ninguno. No hay fotos, videos, logos ni obras de otros. Las personas, la mesa, el mate, la olla y las
+zapatillas son dibujos genéricos hechos con código.
+
+PINTURA (motor de pinceladas y papel)
+  engine.js y paper.py vienen del estilo "Watercolor Brush" de la librería Lemo-Opuscar
+  (https://github.com/lemomo-ai/lemo-opuscar), licencia MIT, © Lemomo. main.js, mix.py y el resto son nuevos para esta película.
+
+VOZ
+  Kokoro-82M (hexgrad/Kokoro-82M, Apache License 2.0), ejecutado en local con kokoro-onnx (MIT).
+  Voz "ef_dora", velocidad 0.9, idioma es. Es voz sintética.
+
+MÚSICA Y SONIDO
+  Música original, sintetizada para esta película: guitarra de nylon y caja de música con los modelos de cuerdas
+  de core/audio/pluck.py (MIT, Lemo-Opuscar) y un colchón de cuerdas hecho con osciladores. Sin muestras de terceros.
+  Foley (pincel, lápiz, platos, vasos, agua, hervor): sintetizado con numpy/scipy.
+
+TIPOGRAFÍAS (SIL Open Font License 1.1, copias de la licencia en fonts/)
+  Cormorant Garamond: © The Cormorant Project Authors. Para los subtítulos.
+  Caveat: © The Caveat Project Authors. Para las notas a mano.
+  Bajadas de Google Fonts y alojadas en fonts/.

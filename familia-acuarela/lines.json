@@ -1,0 +1,9 @@
+[
+ {"id":"l1","text":"Empieza por la mesa. Siempre hay una mesa, y siempre falta una silla.","voice":"ef_dora","speed":0.9,"lang":"es"},
+ {"id":"l2","text":"Después, las cosas chicas. El mate, que da la vuelta.","voice":"ef_dora","speed":0.9,"lang":"es"},
+ {"id":"l3","text":"La olla, que siempre alcanza para uno más.","voice":"ef_dora","speed":0.9,"lang":"es"},
+ {"id":"l4","text":"Las zapatillas, tiradas en la puerta.","voice":"ef_dora","speed":0.9,"lang":"es"},
+ {"id":"l5","text":"Y cuando se sientan todos, hablan al mismo tiempo.","voice":"ef_dora","speed":0.9,"lang":"es"},
+ {"id":"l6","text":"Alguien se ríe. Alguien pide el pan.","voice":"ef_dora","speed":0.9,"lang":"es"},
+ {"id":"l7","text":"Y siempre queda un lugar, para el que llega.","voice":"ef_dora","speed":0.9,"lang":"es"}
+]
